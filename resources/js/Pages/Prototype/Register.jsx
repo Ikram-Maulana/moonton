@@ -4,11 +4,11 @@ import TextInput from "@/Components/TextInput";
 import { Head, Link } from "@inertiajs/inertia-react";
 import React from "react";
 
-export default function Login() {
+export default function Register() {
     return (
         <>
             <Head>
-                <title>Sign In</title>
+                <title>Sign Up</title>
             </Head>
 
             <div className="mx-auto max-w-screen min-h-screen bg-black text-white md:px-10 px-3">
@@ -24,7 +24,7 @@ export default function Login() {
                         <img src="/images/moonton-white.svg" alt="" />
                         <div className="my-[70px]">
                             <div className="font-semibold text-[26px] mb-3">
-                                Welcome Back
+                                Sign Up
                             </div>
                             <p className="text-base text-[#767676] leading-7">
                                 Explore our new movies and get <br />
@@ -34,13 +34,25 @@ export default function Login() {
                         <form className="w-[370px]">
                             <div className="flex flex-col gap-6">
                                 <div>
+                                    <InputLabel forInput="fullname">
+                                        Full Name
+                                    </InputLabel>
+                                    <TextInput
+                                        type="text"
+                                        name="fullname"
+                                        placeholder="Your fullname..."
+                                        defaultValue="Angga React"
+                                    />
+                                </div>
+                                <div>
                                     <InputLabel forInput="email">
                                         Email Address
                                     </InputLabel>
                                     <TextInput
                                         type="email"
                                         name="email"
-                                        placeholder={"Email Address"}
+                                        placeholder="Your Email Address"
+                                        defaultValue="anggaforreact@fb.com"
                                     />
                                 </div>
                                 <div>
@@ -50,23 +62,24 @@ export default function Login() {
                                     <TextInput
                                         type="password"
                                         name="password"
-                                        placeholder={"Password"}
+                                        placeholder="Your Password"
+                                        defaultValue="eeeeeeeeeeeeeee"
                                     />
                                 </div>
                             </div>
                             <div className="grid space-y-[14px] mt-[30px]">
                                 <PrimaryButton>
                                     <span className="text-base font-semibold">
-                                        Start Watching
+                                        Sign Up
                                     </span>
                                 </PrimaryButton>
-                                <Link href={route("prototype.register")}>
+                                <Link href={route("prototype.login")}>
                                     <PrimaryButton
                                         type="button"
                                         variant="light-outline"
                                     >
                                         <span className="text-base text-white">
-                                            Create New Account
+                                            Sign In to My Account
                                         </span>
                                     </PrimaryButton>
                                 </Link>
