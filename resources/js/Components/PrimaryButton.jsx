@@ -1,14 +1,33 @@
-import React from 'react';
+import PropTypes from "prop-types";
+import React from "react";
 
-export default function PrimaryButton({ type = 'submit', className = '', processing, children }) {
+PrimaryButton.propTypes = {
+    type: PropTypes.oneOf(["button", "submit", "reset"]),
+    variant: PropTypes.oneOf([
+        "primary",
+        "warning",
+        "danger",
+        "outline-light",
+        "outline-white",
+    ]),
+    className: PropTypes.string,
+    processing: PropTypes.bool,
+    children: PropTypes.node,
+};
+
+export default function PrimaryButton({
+    type = "submit",
+    variant = "primary",
+    className = "",
+    processing,
+    children,
+}) {
     return (
         <button
             type={type}
-            className={
-                `inline-flex items-center px-4 py-2 bg-gray-900 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest active:bg-gray-900 transition ease-in-out duration-150 ${
-                    processing && 'opacity-25'
-                } ` + className
-            }
+            className={`rounded-2xl py-[13px] text-center w-full ${
+                processing ? "opacity-30" : ""
+            } btn-${variant} ${className}`}
             disabled={processing}
         >
             {children}
