@@ -1,3 +1,5 @@
+@import "input.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,4 +7,24 @@
 .flex::before,
 .flex::after {
     display: none !important;
+}
+
+@layer components {
+    [type="text"],
+    [type="email"],
+    [type="url"],
+    [type="password"],
+    [type="number"],
+    [type="date"],
+    [type="datetime-local"],
+    [type="month"],
+    [type="search"],
+    [type="tel"],
+    [type="time"],
+    [type="week"],
+    [multiple],
+    textarea,
+    select {
+        @apply border-transparent focus:border-transparent focus:ring-transparent;
+    }
 }
