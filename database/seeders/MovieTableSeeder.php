@@ -22,7 +22,7 @@ class MovieTableSeeder extends Seeder
         "category" => "Drama",
         "video_url" => "https://www.youtube.com/embed/6hB3S9bIaco",
         "thumbnail" => "https://i.ytimg.com/vi/6hB3S9bIaco/maxresdefault.jpg",
-        "rating" => 9.3,
+        "rating" => 4.3,
         "is_featured" => 1,
       ],
       [
@@ -31,7 +31,7 @@ class MovieTableSeeder extends Seeder
         "category" => "Crime",
         "video_url" => "https://www.youtube.com/embed/sY1S34973zA",
         "thumbnail" => "https://i.ytimg.com/vi/sY1S34973zA/maxresdefault.jpg",
-        "rating" => 9.2,
+        "rating" => 4.2,
         "is_featured" => 0,
       ],
       [
@@ -40,7 +40,7 @@ class MovieTableSeeder extends Seeder
         "category" => "Action",
         "video_url" => "https://www.youtube.com/embed/EXeTwQWrcwY",
         "thumbnail" => "https://i.ytimg.com/vi/EXeTwQWrcwY/maxresdefault.jpg",
-        "rating" => 9.0,
+        "rating" => 4.0,
         "is_featured" => 0,
       ]
     ];

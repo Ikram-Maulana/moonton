@@ -8,7 +8,7 @@ import { Head } from "@inertiajs/inertia-react";
 import MovieCard from "@/Components/MovieCard";
 import FeaturedMovie from "@/Components/FeaturedMovie";
 
-export default function Dashboard({ auth }) {
+export default function Dashboard({ auth, featuredMovies, movies }) {
     const flickityOptions = {
         cellAlign: "left",
         contain: true,
@@ -33,14 +33,14 @@ export default function Dashboard({ auth }) {
                     </div>
 
                     <Flickity className="gap-[30px]" options={flickityOptions}>
-                        {[1, 2, 3, 4].map((i) => (
+                        {featuredMovies.map((featuredMovie) => (
                             <FeaturedMovie
-                                key={i}
-                                slug="the-batman-in-love"
-                                name={`The Batman in Love ${i}`}
-                                category="Comedy"
-                                thumbnail="https://picsum.photos/seed/picsum/300/300"
-                                rating={i + 1}
+                                key={featuredMovie.id}
+                                slug={featuredMovie.slug}
+                                name={featuredMovie.name}
+                                category={featuredMovie.category}
+                                thumbnail={featuredMovie.thumbnail}
+                                rating={featuredMovie.rating}
                             />
                         ))}
                     </Flickity>
