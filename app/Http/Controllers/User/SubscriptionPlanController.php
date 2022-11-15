@@ -16,4 +16,9 @@ class SubscriptionPlanController extends Controller
 
     return inertia('User/Dashboard/SubscriptionPlan/Index', $data);
   }
+
+  public function userSubscribe(Request $request, SubscriptionPlan $subscriptionPlan)
+  {
+    return $subscriptionPlan;
+  }
 }
