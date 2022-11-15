@@ -15,6 +15,6 @@ class DashboardController extends Controller
       'movies' => Movie::all(),
     ];
 
-    return inertia('User/Dashboard/index', $data);
+    return inertia('User/Dashboard/Index', $data);
   }
 }
