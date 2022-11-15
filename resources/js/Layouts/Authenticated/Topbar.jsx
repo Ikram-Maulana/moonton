@@ -1,6 +1,6 @@
 import { React, useRef } from "react";
 
-export default function Topbar() {
+export default function Topbar({ name }) {
     const dropdownTarget = useRef();
 
     const triggerDropdown = () => {
@@ -19,7 +19,7 @@ export default function Topbar() {
             />
             <div className="flex items-center gap-4">
                 <span className="text-black text-sm font-medium">
-                    Welcome, Granola Sky
+                    Welcome, {name}
                 </span>
                 {/* user avatar */}
                 <div className="collapsible-dropdown flex flex-col gap-2 relative">
