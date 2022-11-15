@@ -15,7 +15,7 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', fn () => to_route('prototype.login'));
+Route::get('/', fn () => to_route('login'));
 
 Route::get('/dashboard', function () {
   return Inertia::render('Dashboard');
