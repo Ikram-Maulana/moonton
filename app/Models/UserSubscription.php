@@ -14,7 +14,7 @@ class UserSubscription extends Model
 
   protected $fillable = [
     'user_id',
-    'subscription_id',
+    'subscription_plan_id',
     'price',
     'expires_at',
     'payment_status',

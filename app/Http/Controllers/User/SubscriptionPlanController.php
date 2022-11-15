@@ -4,7 +4,10 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\SubscriptionPlan;
+use App\Models\UserSubscription;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SubscriptionPlanController extends Controller
 {
@@ -19,6 +22,16 @@ class SubscriptionPlanController extends Controller
 
   public function userSubscribe(Request $request, SubscriptionPlan $subscriptionPlan)
   {
-    return $subscriptionPlan;
+    $data = [
+      'user_id' => Auth::user()->id,
+      'subscription_plan_id' => $subscriptionPlan->id,
+      'price' => $subscriptionPlan->price,
+      'expires_at' => Carbon::now()->addMonth($subscriptionPlan->active_period_in_months),
+      'payment_status' => 'success',
+    ];
+
+    UserSubscription::create($data);
+
+    return to_route('user.dashboard.index');
   }
 }
