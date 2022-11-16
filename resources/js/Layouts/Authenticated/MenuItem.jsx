@@ -11,7 +11,7 @@ export default function MenuItem({
     return (
         <Link
             href={link ? route(link) : null}
-            className={`side-link ${isActive && "active"}`}
+            className={`side-link ${isActive ? "active" : ""}`}
             method={method}
             as="button"
         >
