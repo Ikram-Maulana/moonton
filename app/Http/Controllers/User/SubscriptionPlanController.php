@@ -27,7 +27,7 @@ class SubscriptionPlanController extends Controller
       'subscription_plan_id' => $subscriptionPlan->id,
       'price' => $subscriptionPlan->price,
       'expires_at' => Carbon::now()->addMonth($subscriptionPlan->active_period_in_months),
-      'payment_status' => 'success',
+      'payment_status' => 'paid',
     ];
 
     UserSubscription::create($data);
