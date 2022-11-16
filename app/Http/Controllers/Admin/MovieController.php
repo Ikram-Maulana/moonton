@@ -46,7 +46,10 @@ class MovieController extends Controller
 
     Movie::create($data);
 
-    return to_route('admin.dashboard.movie.index')->with('success', 'Movie inserted successfully');
+    return to_route('admin.dashboard.movie.index')->with([
+      'message' => 'Movie inserted successfully',
+      'type' => 'success',
+    ]);
   }
 
   /**
