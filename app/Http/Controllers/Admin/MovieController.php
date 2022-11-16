@@ -37,7 +37,16 @@ class MovieController extends Controller
    */
   public function store(Store $request)
   {
-    return $request->all();
+    $data = $request->validated();
+
+    if ($request->file('thumbnail')) {
+      $data['thumbnail'] = cloudinary()->upload($request->file('thumbnail')->getRealPath())->getSecurePath();
+    }
+    $data['slug'] = str()->slug($data['name']);
+
+    Movie::create($data);
+
+    return to_route('admin.dashboard.movie.index')->with('success', 'Movie inserted successfully');
   }
 
   /**
