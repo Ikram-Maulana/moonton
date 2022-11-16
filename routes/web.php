@@ -23,10 +23,10 @@ Route::get('/', fn () => to_route('login'));
 Route::middleware('auth', 'role:user')->name('user.dashboard.')->group(function () {
   Route::get('/dashboard', [DashboardController::class, 'index'])->name('index');
 
-  Route::get('/dashboard/movie/{movie:slug}', [MovieController::class, 'show'])->name('movie.show');
+  Route::get('/dashboard/movie/{movie:slug}', [MovieController::class, 'show'])->name('movie.show')->middleware('checkUserSubscription:true');
 
-  Route::get('/dashboard/subscription-plan', [SubscriptionPlanController::class, 'index'])->name('subscriptionPlan.index');
-  Route::post('/dashboard/subscription-plan/{subscriptionPlan}/user-subscribe', [SubscriptionPlanController::class, 'userSubscribe'])->name('subscriptionPlan.userSubscribe');
+  Route::get('/dashboard/subscription-plan', [SubscriptionPlanController::class, 'index'])->name('subscriptionPlan.index')->middleware('checkUserSubscription:false');
+  Route::post('/dashboard/subscription-plan/{subscriptionPlan}/user-subscribe', [SubscriptionPlanController::class, 'userSubscribe'])->name('subscriptionPlan.userSubscribe')->middleware('checkUserSubscription:false');
 });
 
 Route::prefix('prototype')->name('prototype.')->group(function () {

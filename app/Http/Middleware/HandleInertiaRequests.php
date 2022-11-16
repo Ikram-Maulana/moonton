@@ -36,18 +36,18 @@ class HandleInertiaRequests extends Middleware
    */
   private function activePlan()
   {
-    $active_plan = Auth::user() ? Auth::user()->LastActiveUserSubcription : null;
+    $activePlan = Auth::user() ? Auth::user()->LastActiveUserSubscription : null;
 
-    if (!$active_plan) {
+    if (!$activePlan) {
       return null;
     }
 
-    $lastDay = Carbon::parse($active_plan->updated_at)->addMonth($active_plan->subscriptionPlan->active_period_in_months);
-    $activeDay = Carbon::parse($active_plan->updated_at)->diffInDays($lastDay);
-    $remainingActiveDay = Carbon::parse($active_plan->expired_date)->diffInDays(Carbon::now());
+    $lastDay = Carbon::parse($activePlan->updated_at)->addMonths($activePlan->subscriptionPlan->active_period_in_months);
+    $activeDay = Carbon::parse($activePlan->updated_at)->diffInDays($lastDay);
+    $remainingActiveDay = Carbon::parse($activePlan->expired_date)->diffInDays(Carbon::now());
 
     return [
-      'name' => $active_plan->subscriptionPlan->name,
+      'name' => $activePlan->subscriptionPlan->name,
       'remainingActiveDays' => $remainingActiveDay,
       'activeDays' => $activeDay,
     ];
