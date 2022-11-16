@@ -3,6 +3,7 @@
 use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\MovieController;
 use App\Http\Controllers\User\SubscriptionPlanController;
+use App\Http\Controllers\Admin\MovieController as AdminMovieController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -27,6 +28,10 @@ Route::middleware('auth', 'role:user')->name('user.dashboard.')->group(function 
 
   Route::get('/dashboard/subscription-plan', [SubscriptionPlanController::class, 'index'])->name('subscriptionPlan.index')->middleware('checkUserSubscription:false');
   Route::post('/dashboard/subscription-plan/{subscriptionPlan}/user-subscribe', [SubscriptionPlanController::class, 'userSubscribe'])->name('subscriptionPlan.userSubscribe')->middleware('checkUserSubscription:false');
+});
+
+Route::middleware('auth', 'role:admin')->name('admin.dashboard.')->group(function () {
+  Route::resource('/admin/movie', AdminMovieController::class);
 });
 
 Route::prefix('prototype')->name('prototype.')->group(function () {
