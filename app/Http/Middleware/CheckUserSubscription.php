@@ -17,7 +17,6 @@ class CheckUserSubscription
    */
   public function handle(Request $request, Closure $next, $status)
   {
-    ddd(!Auth::user()->isActive);
     if ($status === 'true' && !Auth::user()->isActive) {
       return to_route('user.dashboard.subscriptionPlan.index');
     }
