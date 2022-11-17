@@ -5,7 +5,7 @@ import { Head, Link, useForm } from "@inertiajs/inertia-react";
 import React from "react";
 
 export default function Index({ auth, flashMessage, movies }) {
-    const { delete: destroy } = useForm();
+    const { delete: destroy, put } = useForm();
 
     return (
         <>
@@ -66,25 +66,35 @@ export default function Index({ auth, flashMessage, movies }) {
                                     <div
                                         onClick={(e) => {
                                             e.preventDefault();
-                                            if (
-                                                confirm(
-                                                    "Are you sure to delete this movie?"
-                                                )
-                                            ) {
-                                                destroy(
-                                                    route(
-                                                        "admin.dashboard.movie.destroy",
-                                                        movie.slug
-                                                    )
-                                                );
-                                            }
+
+                                            movie.deleted_at
+                                                ? confirm(
+                                                      "Are you sure to restore this movie?"
+                                                  ) &&
+                                                  put(
+                                                      route(
+                                                          "admin.dashboard.movie.restore",
+                                                          movie.slug
+                                                      )
+                                                  )
+                                                : confirm(
+                                                      "Are you sure to delete this movie?"
+                                                  ) &&
+                                                  destroy(
+                                                      route(
+                                                          "admin.dashboard.movie.destroy",
+                                                          movie.slug
+                                                      )
+                                                  );
                                         }}
                                     >
                                         <PrimaryButton
                                             type="button"
                                             variant="danger"
                                         >
-                                            Delete
+                                            {movie.deleted_at
+                                                ? "Restore"
+                                                : "Delete"}
                                         </PrimaryButton>
                                     </div>
                                 </td>

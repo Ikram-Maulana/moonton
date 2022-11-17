@@ -31,6 +31,7 @@ Route::middleware('auth', 'role:user')->name('user.dashboard.')->group(function 
 });
 
 Route::middleware('auth', 'role:admin')->name('admin.dashboard.')->group(function () {
+  Route::put('/admin/movie/{movie:slug}/restore', [AdminMovieController::class, 'restore'])->name('movie.restore');
   Route::resource('/admin/movie', AdminMovieController::class)->parameter('movie', 'movie:slug');
 });
 
