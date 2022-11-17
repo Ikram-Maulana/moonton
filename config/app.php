@@ -186,7 +186,7 @@ return [
          * Package Service Providers...
          */
     Spatie\Permission\PermissionServiceProvider::class,
-
+    CloudinaryLabs\CloudinaryLaravel\CloudinaryServiceProvider::class,
     /*
          * Application Service Providers...
          */
