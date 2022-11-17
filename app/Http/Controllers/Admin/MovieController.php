@@ -75,7 +75,11 @@ class MovieController extends Controller
    */
   public function edit(Movie $movie)
   {
-    //
+    $data = [
+      'movie' => $movie,
+    ];
+
+    return inertia('Admin/Movie/Edit', $data);
   }
 
   /**
@@ -87,7 +91,7 @@ class MovieController extends Controller
    */
   public function update(Request $request, Movie $movie)
   {
-    //
+    return $request->all();
   }
 
   /**

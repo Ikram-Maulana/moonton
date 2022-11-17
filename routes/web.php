@@ -31,7 +31,7 @@ Route::middleware('auth', 'role:user')->name('user.dashboard.')->group(function 
 });
 
 Route::middleware('auth', 'role:admin')->name('admin.dashboard.')->group(function () {
-  Route::resource('/admin/movie', AdminMovieController::class);
+  Route::resource('/admin/movie', AdminMovieController::class)->parameter('movie', 'movie:slug');
 });
 
 Route::prefix('prototype')->name('prototype.')->group(function () {
