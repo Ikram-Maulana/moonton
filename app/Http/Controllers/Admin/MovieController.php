@@ -127,6 +127,10 @@ class MovieController extends Controller
    */
   public function destroy(Movie $movie)
   {
-    //
+    $movie->delete();
+    return to_route('admin.dashboard.movie.index')->with([
+      'message' => 'Movie deleted successfully',
+      'type' => 'success',
+    ]);
   }
 }
