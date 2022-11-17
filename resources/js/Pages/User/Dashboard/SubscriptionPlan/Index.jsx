@@ -23,15 +23,10 @@ export default function SubscriptionPlan({ auth, subscriptionPlans, env }) {
     const onSnapMidtrans = (userSubscription) => {
         snap.pay(userSubscription.snap_token, {
             onSuccess: function (result) {
-                console.log("success");
-                console.log(result);
+                Inertia.visit(route("user.dashboard.index"));
             },
-            onPending: function (result) {
-                console.log("pending");
-                console.log(result);
-            },
+            onPending: function (result) {},
             onError: function (result) {
-                console.log("error");
                 console.log(result);
             },
         });

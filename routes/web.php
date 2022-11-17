@@ -19,6 +19,9 @@ use Inertia\Inertia;
 |
 */
 
+// MIDTRANS ROUTE
+Route::post('midtrans/notification', [SubscriptionPlanController::class, 'midtransCallback']);
+
 Route::get('/', fn () => to_route('login'));
 
 Route::middleware('auth', 'role:user')->name('user.dashboard.')->group(function () {
