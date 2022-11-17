@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Movie\Store;
+use App\Http\Requests\Admin\Movie\Update;
 use App\Models\Movie;
 use Illuminate\Http\Request;
 
@@ -36,7 +37,7 @@ class MovieController extends Controller
   /**
    * Store a newly created resource in storage.
    *
-   * @param  \Illuminate\Http\Request  $request
+   * @param  \App\Http\Requests\Admin\Movie\Store  $request
    * @return \Illuminate\Http\Response
    */
   public function store(Store $request)
@@ -85,13 +86,37 @@ class MovieController extends Controller
   /**
    * Update the specified resource in storage.
    *
-   * @param  \Illuminate\Http\Request  $request
+   * @param  \App\Http\Requests\Admin\Movie\Update  $request
    * @param  \App\Models\Movie  $movie
    * @return \Illuminate\Http\Response
    */
-  public function update(Request $request, Movie $movie)
+  public function update(Update $request, Movie $movie)
   {
-    return $request->all();
+    $data = $request->validated();
+
+    if ($request->name !== $movie->name) {
+      $data['slug'] = str()->slug($data['name']);
+    }
+
+    if ($request->file('thumbnail')) {
+      if ($request->old_image) {
+        $old_image = $request->old_image;
+        // get filename from the url ex: (fileId.png)
+        $fileName = substr($old_image, strrpos($old_image, '/') + 1);
+        // get fileId from the filename ex: (fileId)
+        $publicId = substr($fileName, 0, strrpos($fileName, '.'));
+        cloudinary()->destroy($publicId);
+      }
+
+      $data['thumbnail'] = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
+    }
+
+    $movie->update($data);
+
+    return to_route('admin.dashboard.movie.index')->with([
+      'message' => 'Movie updated successfully',
+      'type' => 'success',
+    ]);
   }
 
   /**

@@ -5,7 +5,7 @@ namespace App\Http\Requests\Admin\Movie;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class Store extends FormRequest
+class Update extends FormRequest
 {
   /**
    * Determine if the user is authorized to make this request.
@@ -25,12 +25,13 @@ class Store extends FormRequest
   public function rules()
   {
     return [
-      "name" => "required|string|unique:movies,name",
-      "category" => "required|string",
-      "video_url" => "required|string|url",
-      "thumbnail" => "required|image",
-      "rating" => "required|numeric|min:0|max:5",
+      "name" => "nullable|string|unique:movies,name," . $this->movie->id,
+      "category" => "nullable|string",
+      "video_url" => "nullable|string|url",
+      "thumbnail" => "nullable|image",
+      "rating" => "nullable|numeric|min:0|max:5",
       "is_featured" => "nullable|boolean",
+      "old_image" => "nullable|string",
     ];
   }
 }

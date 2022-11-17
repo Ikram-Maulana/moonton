@@ -11,6 +11,7 @@ import { Head, useForm } from "@inertiajs/inertia-react";
 export default function Edit({ auth, movie }) {
     const { data, setData, processing, errors } = useForm({
         ...movie,
+        old_image: movie.thumbnail ? movie.thumbnail : null,
     });
 
     const onHandleChange = (event) => {
@@ -84,7 +85,15 @@ export default function Edit({ auth, movie }) {
                 <InputLabel forInput="thumbnail" className="mt-4">
                     Thumbnail
                 </InputLabel>
-                <img src={movie.thumbnail} alt={movie.name} className="w-40" />
+                {movie.thumbnail ? (
+                    <img
+                        src={movie.thumbnail}
+                        alt={movie.name}
+                        className="w-40"
+                    />
+                ) : (
+                    <img className="w-40" />
+                )}
                 <TextInput
                     type="file"
                     name="thumbnail"
