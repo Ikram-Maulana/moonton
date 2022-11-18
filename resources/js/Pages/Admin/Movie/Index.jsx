@@ -46,7 +46,7 @@ export default function Index({ auth, flashMessage, movies }) {
                                 </td>
                                 <td>{movie.name}</td>
                                 <td>{movie.category}</td>
-                                <td>{movie.rating.toFixed(1)}</td>
+                                <td>{Math.round(movie.rating * 100) / 100}</td>
                                 <td>
                                     <Link
                                         href={route(

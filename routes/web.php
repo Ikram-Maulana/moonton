@@ -24,6 +24,11 @@ Route::post('midtrans/notification', [SubscriptionPlanController::class, 'midtra
 
 Route::get('/', fn () => to_route('login'));
 
+Route::middleware('auth', 'role:admin')->name('admin.dashboard.')->group(function () {
+  Route::put('/admin/movie/{movie:slug}/restore', [AdminMovieController::class, 'restore'])->name('movie.restore');
+  Route::resource('/admin/movie', AdminMovieController::class)->parameter('movie', 'movie:slug');
+});
+
 Route::middleware('auth', 'role:user')->name('user.dashboard.')->group(function () {
   Route::get('/dashboard', [DashboardController::class, 'index'])->name('index');
 
@@ -33,10 +38,6 @@ Route::middleware('auth', 'role:user')->name('user.dashboard.')->group(function 
   Route::post('/dashboard/subscription-plan/{subscriptionPlan}/user-subscribe', [SubscriptionPlanController::class, 'userSubscribe'])->name('subscriptionPlan.userSubscribe')->middleware('checkUserSubscription:false');
 });
 
-Route::middleware('auth', 'role:admin')->name('admin.dashboard.')->group(function () {
-  Route::put('/admin/movie/{movie:slug}/restore', [AdminMovieController::class, 'restore'])->name('movie.restore');
-  Route::resource('/admin/movie', AdminMovieController::class)->parameter('movie', 'movie:slug');
-});
 
 Route::prefix('prototype')->name('prototype.')->group(function () {
   Route::get('/login', function () {
